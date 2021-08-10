@@ -1,5 +1,7 @@
+import PersistentDrawerLeft from './components/drawer/drawer';
+
 function App() {
-  return <div className="App"></div>;
+  return <PersistentDrawerLeft />;
 }
 
 export default App;
