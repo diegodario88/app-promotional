@@ -1,0 +1,4 @@
+# App - Promotional
+
+## Tecnologias
+* React
