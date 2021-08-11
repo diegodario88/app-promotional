@@ -107,6 +107,28 @@ const useStyles = makeStyles((theme) => ({
   peopleIcon: {
     fontSize: 50,
     color: 'rgba(0, 0, 0, 0.6)'
+  },
+  productsBox: {
+    display: 'flex',
+    flexDirection: 'column',
+    border: '2px solid #E1E1E1',
+    borderRadius: 4
+  },
+  productsInternalBox: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    lineHeight: '10px',
+    height: '48px',
+    borderLeft: '2px solid #EF6C00'
+  },
+  productsSubInternalBox: {
+    height: '27px',
+    borderTop: '2px solid #E1E1E1',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    padding: '8px'
   }
 }));
 
@@ -122,10 +144,21 @@ const FilterInput = withStyles((theme) => ({
   }
 }))(InputBase);
 
+const ProductFilterInput = withStyles((theme) => ({
+  input: {
+    borderRadius: 4,
+    fontSize: 12,
+    height: '40px',
+    padding: '10px 26px 10px 12px',
+    transition: theme.transitions.create(['border-color', 'box-shadow'])
+  }
+}))(InputBase);
+
 export default function Dashboard() {
   const classes = useStyles();
   const [type, setType] = React.useState('');
   const [date, setDate] = React.useState('');
+  const [products, setProducts] = React.useState('');
 
   return (
     <Container maxWidth="lg">
@@ -177,7 +210,6 @@ export default function Dashboard() {
                 onChange={(e) => setDate(e.target.value)}
                 input={<FilterInput />}
               >
-                <option aria-label="None" value="" />
                 <option value={10}>Últimos 7 dias</option>
                 <option value={20}>Últimos 15 dias</option>
                 <option value={30}>Últimos 30 dias</option>
@@ -186,7 +218,7 @@ export default function Dashboard() {
           </Box>
         </Grid>
         <Grid item xs={12} md={8} lg={8}>
-          <Grid container style={{ gap: '24px' }}>
+          <Grid container>
             <Grid item xs={12} md={6} lg={6} className={classes.boxReveneus}>
               <ShowChartIcon className={classes.chartIcon} />
               <Box
@@ -265,8 +297,419 @@ export default function Dashboard() {
           </Paper>
         </Grid>
         <Grid item xs={12} md={4} lg={4}>
-          <Paper style={{ minHeight: '436px' }} />
-          <Paper style={{ height: '172px', marginTop: '16px' }} />
+          <Paper
+            style={{
+              minHeight: '473px',
+              padding: '16px',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '16px'
+            }}
+          >
+            <Box
+              display="flex"
+              justifyContent="space-between"
+              alignItems="center"
+            >
+              <Typography
+                style={{ color: 'rgba(0, 0, 0, 0.6)', fontWeight: 500 }}
+              >
+                Produtos
+              </Typography>
+              <FormControl>
+                <NativeSelect
+                  id="products-filter"
+                  value={products}
+                  placeholder="Tipo"
+                  onChange={(e) => setProducts(e.target.value)}
+                  input={<ProductFilterInput />}
+                >
+                  <option value={10}>Mais Vendidos</option>
+                  <option value={20}>Menor Preço</option>
+                </NativeSelect>
+              </FormControl>
+            </Box>
+            <Box className={classes.productsBox}>
+              <Box className={classes.productsInternalBox}>
+                <Box style={{ display: 'flex', gap: '8px' }}>
+                  <img src="coca-cola.png" width="28px" height="28px" />
+                  <Box style={{ display: 'flex', flexDirection: 'column' }}>
+                    <Typography
+                      style={{
+                        fontSize: '12px',
+                        fontWeight: 400,
+                        lineHeight: '16px',
+                        color: 'rgba(0, 0, 0, 0.87)'
+                      }}
+                    >
+                      Coca-Cola 350mL
+                    </Typography>
+                    <Typography
+                      style={{
+                        fontSize: '10px',
+                        fontWeight: 400,
+                        lineHeight: '16px',
+                        color: 'rgba(0, 0, 0, 0.6)'
+                      }}
+                    >
+                      Quantidade: 35
+                    </Typography>
+                  </Box>
+                  <Box
+                    style={{
+                      display: 'flex',
+                      flexDirection: 'column',
+                      marginLeft: '40px'
+                    }}
+                  >
+                    <Typography
+                      style={{
+                        fontSize: '12px',
+                        fontWeight: 400,
+                        lineHeight: '16px',
+                        color: 'rgba(0, 0, 0, 0.87)'
+                      }}
+                    >
+                      Preço / Promoção
+                    </Typography>
+                    <Box display="flex">
+                      <Typography
+                        style={{
+                          fontSize: '12px',
+                          fontWeight: 400,
+                          lineHeight: '16px',
+                          color: 'rgba(0, 0, 0, 0.6)',
+                          display: 'inline-block'
+                        }}
+                      >
+                        R$ 3,50 /
+                      </Typography>
+                      <Typography
+                        style={{
+                          fontSize: '12px',
+                          fontWeight: 400,
+                          lineHeight: '16px',
+                          color: '#388E3C',
+                          display: 'inline-block',
+                          marginLeft: '4px'
+                        }}
+                      >
+                        R$ 2,99
+                      </Typography>
+                    </Box>
+                  </Box>
+                </Box>
+              </Box>
+              <Box className={classes.productsSubInternalBox}>
+                <Box display="flex">
+                  <Typography
+                    style={{
+                      fontSize: '12px',
+                      fontWeight: 400,
+                      lineHeight: '16px',
+                      color: '#787878',
+                      display: 'inline-block'
+                    }}
+                  >
+                    Pontos:
+                  </Typography>
+                  <Typography
+                    style={{
+                      fontSize: '12px',
+                      fontWeight: 400,
+                      lineHeight: '16px',
+                      color: '#EF6C00',
+                      display: 'inline-block',
+                      marginLeft: '4px'
+                    }}
+                  >
+                    150 pts
+                  </Typography>
+                </Box>
+                <Box display="flex">
+                  <Typography
+                    style={{
+                      fontSize: '12px',
+                      fontWeight: 400,
+                      lineHeight: '16px',
+                      color: 'rgba(0, 0, 0, 0.6)',
+                      display: 'inline-block'
+                    }}
+                  >
+                    Resgates:
+                  </Typography>
+                  <Typography
+                    style={{
+                      fontSize: '12px',
+                      fontWeight: 400,
+                      lineHeight: '16px',
+                      color: '#EF6C00',
+                      display: 'inline-block',
+                      marginLeft: '4px'
+                    }}
+                  >
+                    33 pts
+                  </Typography>
+                </Box>
+              </Box>
+            </Box>
+            <Box className={classes.productsBox}>
+              <Box className={classes.productsInternalBox}>
+                <Box style={{ display: 'flex', gap: '8px' }}>
+                  <img src="x-burger.png" width="28px" height="28px" />
+                  <Box style={{ display: 'flex', flexDirection: 'column' }}>
+                    <Typography
+                      style={{
+                        fontSize: '12px',
+                        fontWeight: 400,
+                        lineHeight: '16px',
+                        color: 'rgba(0, 0, 0, 0.87)'
+                      }}
+                    >
+                      X-Burguer
+                    </Typography>
+                    <Typography
+                      style={{
+                        fontSize: '10px',
+                        fontWeight: 400,
+                        lineHeight: '16px',
+                        color: 'rgba(0, 0, 0, 0.6)'
+                      }}
+                    >
+                      Quantidade: 55
+                    </Typography>
+                  </Box>
+                  <Box
+                    style={{
+                      display: 'flex',
+                      flexDirection: 'column',
+                      marginLeft: '40px'
+                    }}
+                  >
+                    <Typography
+                      style={{
+                        fontSize: '12px',
+                        fontWeight: 400,
+                        lineHeight: '16px',
+                        color: 'rgba(0, 0, 0, 0.87)'
+                      }}
+                    >
+                      Preço / Promoção
+                    </Typography>
+                    <Box display="flex">
+                      <Typography
+                        style={{
+                          fontSize: '12px',
+                          fontWeight: 400,
+                          lineHeight: '16px',
+                          color: 'rgba(0, 0, 0, 0.6)',
+                          display: 'inline-block'
+                        }}
+                      >
+                        R$ 42,35 /
+                      </Typography>
+                      <Typography
+                        style={{
+                          fontSize: '12px',
+                          fontWeight: 400,
+                          lineHeight: '16px',
+                          color: '#388E3C',
+                          display: 'inline-block',
+                          marginLeft: '4px'
+                        }}
+                      >
+                        R$ 40,00
+                      </Typography>
+                    </Box>
+                  </Box>
+                </Box>
+              </Box>
+              <Box className={classes.productsSubInternalBox}>
+                <Box display="flex">
+                  <Typography
+                    style={{
+                      fontSize: '12px',
+                      fontWeight: 400,
+                      lineHeight: '16px',
+                      color: '#787878',
+                      display: 'inline-block'
+                    }}
+                  >
+                    Pontos:
+                  </Typography>
+                  <Typography
+                    style={{
+                      fontSize: '12px',
+                      fontWeight: 400,
+                      lineHeight: '16px',
+                      color: '#EF6C00',
+                      display: 'inline-block',
+                      marginLeft: '4px'
+                    }}
+                  >
+                    120 pts
+                  </Typography>
+                </Box>
+                <Box display="flex">
+                  <Typography
+                    style={{
+                      fontSize: '12px',
+                      fontWeight: 400,
+                      lineHeight: '16px',
+                      color: 'rgba(0, 0, 0, 0.6)',
+                      display: 'inline-block'
+                    }}
+                  >
+                    Resgates:
+                  </Typography>
+                  <Typography
+                    style={{
+                      fontSize: '12px',
+                      fontWeight: 400,
+                      lineHeight: '16px',
+                      color: '#EF6C00',
+                      display: 'inline-block',
+                      marginLeft: '4px'
+                    }}
+                  >
+                    20 pts
+                  </Typography>
+                </Box>
+              </Box>
+            </Box>
+            <Box className={classes.productsBox}>
+              <Box className={classes.productsInternalBox}>
+                <Box style={{ display: 'flex', gap: '8px' }}>
+                  <img src="brochette.png" width="28px" height="28px" />
+                  <Box style={{ display: 'flex', flexDirection: 'column' }}>
+                    <Typography
+                      style={{
+                        fontSize: '12px',
+                        fontWeight: 400,
+                        lineHeight: '16px',
+                        color: 'rgba(0, 0, 0, 0.87)'
+                      }}
+                    >
+                      Espeto de Carne
+                    </Typography>
+                    <Typography
+                      style={{
+                        fontSize: '10px',
+                        fontWeight: 400,
+                        lineHeight: '16px',
+                        color: 'rgba(0, 0, 0, 0.6)'
+                      }}
+                    >
+                      Quantidade: 80
+                    </Typography>
+                  </Box>
+                  <Box
+                    style={{
+                      display: 'flex',
+                      flexDirection: 'column',
+                      marginLeft: '40px'
+                    }}
+                  >
+                    <Typography
+                      style={{
+                        fontSize: '12px',
+                        fontWeight: 400,
+                        lineHeight: '16px',
+                        color: 'rgba(0, 0, 0, 0.87)'
+                      }}
+                    >
+                      Preço / Promoção
+                    </Typography>
+                    <Box display="flex">
+                      <Typography
+                        style={{
+                          fontSize: '12px',
+                          fontWeight: 400,
+                          lineHeight: '16px',
+                          color: 'rgba(0, 0, 0, 0.6)',
+                          display: 'inline-block'
+                        }}
+                      >
+                        R$ 4,50 /
+                      </Typography>
+                      <Typography
+                        style={{
+                          fontSize: '12px',
+                          fontWeight: 400,
+                          lineHeight: '16px',
+                          color: '#388E3C',
+                          display: 'inline-block',
+                          marginLeft: '4px'
+                        }}
+                      >
+                        R$ 4,50
+                      </Typography>
+                    </Box>
+                  </Box>
+                </Box>
+              </Box>
+            </Box>
+          </Paper>
+          <Paper
+            style={{
+              height: '172px',
+              marginTop: '16px',
+              padding: '16px',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '16px'
+            }}
+          >
+            <Box
+              display="flex"
+              justifyContent="space-between"
+              alignItems="center"
+            >
+              <Typography
+                style={{
+                  color: 'rgba(0, 0, 0, 0.6)',
+                  fontWeight: 500,
+                  fontSize: '14px'
+                }}
+              >
+                Serviços
+              </Typography>
+              <FormControl>
+                <NativeSelect
+                  id="products-filter"
+                  value={products}
+                  placeholder="Tipo"
+                  onChange={(e) => setProducts(e.target.value)}
+                  input={<ProductFilterInput />}
+                >
+                  <option value={10}>Mais Utilizados</option>
+                  <option value={20}>Menor Preço</option>
+                </NativeSelect>
+              </FormControl>
+            </Box>
+            <Box className={classes.productsBox} style={{ padding: '8px' }}>
+              <Typography
+                style={{
+                  fontSize: '10px',
+                  fontWeight: 400,
+                  lineHeight: '16px',
+                  color: 'rgba(0, 0, 0, 0.87)'
+                }}
+              >
+                Permite cobrar taxa de entrega de pedidos
+              </Typography>
+              <Typography
+                style={{
+                  fontSize: '10px',
+                  fontWeight: 400,
+                  lineHeight: '16px',
+                  color: 'rgba(0, 0, 0, 0.6)'
+                }}
+              >
+                Quantidade: 33 · R$ 20,00 em média
+              </Typography>
+            </Box>
+          </Paper>
         </Grid>
       </Grid>
     </Container>
