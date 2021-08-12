@@ -64,7 +64,7 @@ const useStyles = makeStyles((theme) => ({
     border: '1px solid #E1E1E1',
     borderRadius: '4px',
     [theme.breakpoints.up('md')]: {
-      width: '255px'
+      width: '311px'
     },
     height: '40px'
   },
@@ -77,6 +77,10 @@ const useStyles = makeStyles((theme) => ({
       justifyContent: 'center',
       gap: '24px'
     }
+  },
+  boxSecondary: {
+    display: 'flex',
+    gap: '40px'
   },
   boxReveneus: {
     display: 'flex',
@@ -92,6 +96,7 @@ const useStyles = makeStyles((theme) => ({
       'linear-gradient(180deg, rgba(239, 108, 0, 0.75) 0%, #EF6C00 100%)'
   },
   boxUsers: {
+    width: '100%',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
@@ -119,8 +124,7 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     justifyContent: 'center',
     lineHeight: '10px',
-    height: '48px',
-    borderLeft: '2px solid #EF6C00'
+    height: '48px'
   },
   productsSubInternalBox: {
     height: '27px',
@@ -167,7 +171,7 @@ export default function Dashboard() {
         spacing={3}
         style={{ paddingLeft: '36px', paddingRight: '36px' }}
       >
-        <Grid item xs={12} md={6} lg={6}>
+        <Grid item xs={12} md={7} lg={7}>
           <div className={classes.search}>
             <div className={classes.searchIcon}>
               <SearchIcon />
@@ -184,7 +188,7 @@ export default function Dashboard() {
             />
           </div>
         </Grid>
-        <Grid item xs={12} md={6} lg={6}>
+        <Grid item xs={12} md={5} lg={5}>
           <Box className={classes.boxHeader}>
             <FormControl style={{ width: '100%' }}>
               <InputLabel htmlFor="type-filter">Tipo</InputLabel>
@@ -217,13 +221,12 @@ export default function Dashboard() {
             </FormControl>
           </Box>
         </Grid>
-        <Grid item xs={12} md={8} lg={8}>
-          <Grid container>
+        <Grid item xs={12} md={7} lg={7}>
+          <Box className={classes.boxSecondary}>
             <Grid item xs={12} md={6} lg={6} className={classes.boxReveneus}>
               <ShowChartIcon className={classes.chartIcon} />
               <Box
                 style={{
-                  minHeight: '86px',
                   width: '100%',
                   display: 'flex',
                   flexDirection: 'column',
@@ -258,7 +261,6 @@ export default function Dashboard() {
                 <PeopleIcon className={classes.peopleIcon} />
                 <Box
                   style={{
-                    minHeight: '86px',
                     width: '100%',
                     display: 'flex',
                     flexDirection: 'column',
@@ -286,20 +288,18 @@ export default function Dashboard() {
                 </Box>
               </Paper>
             </Grid>
-          </Grid>
+          </Box>
           <Paper style={{ padding: '10px', marginTop: '16px' }}>
             <LineChart />
           </Paper>
-          <Paper
-            style={{ padding: '10px', marginTop: '16px', maxHeight: '150px' }}
-          >
+          <Paper style={{ padding: '10px', marginTop: '16px' }}>
             <PieChart />
           </Paper>
         </Grid>
-        <Grid item xs={12} md={4} lg={4}>
+        <Grid item xs={12} md={5} lg={5}>
           <Paper
             style={{
-              minHeight: '473px',
+              minHeight: '441px',
               padding: '16px',
               display: 'flex',
               flexDirection: 'column',
@@ -330,7 +330,10 @@ export default function Dashboard() {
               </FormControl>
             </Box>
             <Box className={classes.productsBox}>
-              <Box className={classes.productsInternalBox}>
+              <Box
+                className={classes.productsInternalBox}
+                style={{ borderLeft: '2px solid #EF6C00' }}
+              >
                 <Box style={{ display: 'flex', gap: '8px' }}>
                   <img src="coca-cola.png" width="28px" height="28px" />
                   <Box style={{ display: 'flex', flexDirection: 'column' }}>
@@ -454,7 +457,10 @@ export default function Dashboard() {
               </Box>
             </Box>
             <Box className={classes.productsBox}>
-              <Box className={classes.productsInternalBox}>
+              <Box
+                className={classes.productsInternalBox}
+                style={{ borderLeft: '2px solid #F5A15C' }}
+              >
                 <Box style={{ display: 'flex', gap: '8px' }}>
                   <img src="x-burger.png" width="28px" height="28px" />
                   <Box style={{ display: 'flex', flexDirection: 'column' }}>
@@ -578,7 +584,10 @@ export default function Dashboard() {
               </Box>
             </Box>
             <Box className={classes.productsBox}>
-              <Box className={classes.productsInternalBox}>
+              <Box
+                className={classes.productsInternalBox}
+                style={{ borderLeft: '2px solid #F7B985' }}
+              >
                 <Box style={{ display: 'flex', gap: '8px' }}>
                   <img src="brochette.png" width="28px" height="28px" />
                   <Box style={{ display: 'flex', flexDirection: 'column' }}>
